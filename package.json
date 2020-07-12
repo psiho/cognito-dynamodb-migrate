@@ -1,0 +1,16 @@
+{
+  "name": "cognito-dynamodb-migrate",
+  "version": "1.0.0",
+  "description": "example helper to migrate Cognito users (via CSV) and DynamoDB table (via DynamoDB JSON)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --unhandled-rejections=strict index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "https://github.com/psiho",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "cognito-backup-restore": "^1.3.1"
+  }
+}

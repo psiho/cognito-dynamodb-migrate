@@ -1,0 +1,7 @@
+/outputs/*
+!outputs/read.ME
+
+/node_modules/
+.idea
+
+
