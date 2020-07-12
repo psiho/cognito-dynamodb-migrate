@@ -21,11 +21,15 @@ I opted for simple CSV import:
 Script uses [cognito-backup-restore](https://github.com/rahulpsd18/cognito-backup-restore) tool to pull Cognito users and then just converts JSON to CSV for manual import. A feature missing in cognito-backup-restore.
 Note that cognito-backup-restore does have a restore feature too, but it sends out emails to users which was not what I wanted. I wanted this migration silent.
 
+IMPORTANT: Check the script before running, script exports only a few fields I needed, if you use more than that you'll have to change some code!
+
 ### migrates DynamoDB table
-AWS CLI is used (this is a required external dependency!) to pull DynamoDB JSON (`aws dynamodb scn`). Then script goes through JSON and uses `aws dynamodb put-item` to import all into a new table. `batch-write` was something to think about (it can do 25 records in a batch) but my table was small enough to do it this way.
+AWS CLI is used (this is a required external dependency!) to pull DynamoDB JSON (`aws dynamodb scan`). Then script goes through JSON and uses `aws dynamodb put-item` to import all into a new table. `batch-write` was something to think about (it can do 25 records in a batch) but my table was small enough to do it this way.
 
 Again, there are other options to migrate DynamoDB, Amazon suggests [AWS Data Pipeline](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBPipeline.html) but for small to medium tables that's an overkill.
 
 
 ## Requirements
-AWS CLI installed and configured with credentials... this script will not ask for any of those, it will just run AWS CLI from node `spawn`. cognito-backup-restore does similar.
+- AWS CLI installed and configured with credentials... this script will not ask for any of those, it will just run AWS CLI from node `spawn`. cognito-backup-restore does similar.
+- change config section in index.js to point to your resources!
+- check/change Cognito column mappings in index.js to match your needs!
